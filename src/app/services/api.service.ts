@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Idle } from '@ng-idle/core';
 
@@ -7,21 +7,31 @@ import { Idle } from '@ng-idle/core';
 })
 export class ApiService {
 
-  constructor(private http : HttpClient, private idle:Idle) { }
+  httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json;charset=UTF-8' })
+  };
 
-  postProduct(data:any)
-  {
-    return this.http.post<any>("http://localhost:3000/productList/",data);
+  constructor(private http: HttpClient, private idle: Idle) { }
+
+  postProduct(data: any) {
+
+    return this.http.post<any>("http://localhost:3000/productList/", data);
   }
-    getProduct(){
-      return this.http.get<any>("http://localhost:3000/productList/");
-    }
 
-    putProduct(data:any,id : number){
-      return this.http.put<any>("http://localhost:3000/productList/"+id,data);
-    }
-    
-    deleteProduct(id:number){
-      return this.http.delete<any>("http://localhost:3000/productList/"+id);
-    }
+  postIdle(data: any) {
+    // debugger
+    return this.http.post<any>("http://localhost:3000/ildeList/", data, this.httpOptions);
+  }
+
+  getProduct() {
+    return this.http.get<any>("http://localhost:3000/productList/");
+  }
+
+  putProduct(data: any, id: number) {
+    return this.http.put<any>("http://localhost:3000/productList/" + id, data);
+  }
+
+  deleteProduct(id: number) {
+    return this.http.delete<any>("http://localhost:3000/productList/" + id);
+  }
 }

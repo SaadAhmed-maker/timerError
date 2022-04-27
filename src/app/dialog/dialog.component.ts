@@ -2,7 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormGroup,FormBuilder,Validators } from '@angular/forms';
 import { ApiService } from '../services/api.service';
 import {MatDialogRef , MAT_DIALOG_DATA} from '@angular/material/dialog'
-
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-dialog',
   templateUrl: './dialog.component.html',
@@ -15,7 +15,8 @@ export class DialogComponent implements OnInit {
     actionBtn : string = "Save"
     constructor(private formBuilder : FormBuilder,
        private api : ApiService,@Inject(MAT_DIALOG_DATA) public editData : any,
-       private dialogRef : MatDialogRef<DialogComponent>){ }
+       private dialogRef : MatDialogRef<DialogComponent>,
+       private toast : ToastrService ){ }
 
   
 
@@ -50,7 +51,8 @@ export class DialogComponent implements OnInit {
         this.api.postProduct(this.productForm.value)
         .subscribe({
           next:(res)=>{
-            alert("Product added successfully");
+            this.toast.success("Product added Successfully");
+            // alert("Product added successfully");
             this.productForm.reset();
             this.dialogRef.close('save');
           },

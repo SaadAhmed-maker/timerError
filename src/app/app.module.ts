@@ -27,6 +27,8 @@ import {MatCardModule} from '@angular/material/card';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { NgIdleKeepaliveModule } from '@ng-idle/keepalive';
 import { MomentModule } from 'angular2-moment';
+import { ToastrModule } from 'ngx-toastr';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -58,7 +60,8 @@ import { MomentModule } from 'angular2-moment';
     MatCardModule,
     FlexLayoutModule,
     NgIdleKeepaliveModule.forRoot(),
-    MomentModule
+    MomentModule,
+    ToastrModule.forRoot()
     
     
   ],
